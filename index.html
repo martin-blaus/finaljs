@@ -64,14 +64,9 @@
             <div class="pb-3">
                 <h1>Proximos partidos</h1>
             </div>
-            <button class="btn btn-secondary btn-sm dropdown-toggle mb-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Ordenar
-            </button>
-                <ul class="dropdown-menu text-center">
-                    <li><a class="dropdown-item" href="#">Nombre</a></li>
-                    <li><a class="dropdown-item" href="#">Precio</a></li>
-                    <li><a class="dropdown-item" href="#">Fecha</a></li>
-                </ul>
+                <div class="mb-4 mx-5" id="barraBusqueda">
+                    <input type="text" class="form-control" id="buscador" placeholder="¿Que evento buscas?">
+                </div>
             <div id="partidos">
                 <!--partido1-->
                 <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -82,7 +77,7 @@
                                 <h5 class="card-title">BLACKTAIL vs MAYCAM EVOLVE</h5>
                                 <p class="card-text">The Last Legends - 24 de septiembre - League of Legends</p>
                                 <p class="card-text text-success fw-bolder">$1200</p>                            
-                                <a href="#" id="botonUno" class="btn btn-secondary">TICKETS</a>
+                                <button name="elegir" id="uno" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
                             </div>
                         </div>
                     </div>
@@ -93,7 +88,7 @@
                                 <h5 class="card-title">BLACKTAIL vs 9Z</h5>
                                 <p class="card-text">Valorant Champions - 16 de septiembre - VALORANT</p>
                                 <p class="card-text text-success fw-bolder">$1500</p>
-                                <a href="#" id="botonDos" class="btn btn-secondary">TICKETS</a>
+                                <button name="elegir" id="dos" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
                             </div>
                         </div>
                     </div>
@@ -104,18 +99,18 @@
                                 <h5 class="card-title">BLACKTAIL vs G2 ESPORTS</h5>
                                 <p class="card-text">Rocket League Championship - 30 de septiembre - Rocket League</p>
                                 <p class="card-text text-success fw-bolder">$900</p>
-                                <a href="#" id="botonTres" class="btn btn-secondary">TICKETS</a>
+                                <button name="elegir" id="tres" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card bg-dark bg-gradient" id="partido4">
+                        <div class="card bg-dark bg-gradient" id="partidoCuatro">
                             <img src="recursos/5.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">BLACKTAIL vs TEAM QUESO</h5>
                                 <p class="card-text">Rocket League Championship - 1 de octubre - Rocket League</p>
                                 <p class="card-text text-success fw-bolder">$900</p>
-                                <a href="#" id="botonCuatro" class="btn btn-secondary">TICKETS</a>
+                                <button name="elegir" id="cuatro" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
                             </div>
                         </div>
                     </div>

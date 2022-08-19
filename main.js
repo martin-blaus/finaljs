@@ -42,3 +42,41 @@ const partidos = `[
 ]`
 const jsondatos = JSON.parse(partidos);
 console.log(typeof jsondatos);
+
+const barraBusqueda = document.getElementById("barraBusqueda");
+const inputs = document.querySelectorAll("#barraBusqueda input");
+const partidoUno = document.getElementById("partidoUno");
+const partidoDos = document.getElementById("partidoDos");
+const partidoTres = document.getElementById("partidoTres");
+const partidoCuatro= document.getElementById("partidoCuatro");
+
+
+inputs.forEach((input) => {
+    input.addEventListener("keyup", (b) => {
+        //buscarPartido
+    });
+    }); 
+const buscarPartido = (e) => {
+    //funcion para que se muestren solo los partidos que coinciden con la busqueda 
+}
+
+//opciones de cada partido
+partidoUno.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("1");
+});
+
+partidoDos.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("2");
+});
+
+partidoTres.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("3");
+});
+
+partidoCuatro.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("4");
+});
