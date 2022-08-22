@@ -1,4 +1,4 @@
-//vi un video que lo hacia asi a la base de datos y tenia el json aparte, no le encuentro el sentido pero al menos funciona 
+//vi un video que lo hacia asi a la base de datos y tenia el json aparte, no le encuentro el sentido tenerlo en los dos lados pero al menos funciona 
 const partidos = `[
     {
         "id":1,
@@ -62,7 +62,7 @@ const listaPartidos = document.getElementById("listaPartidos");
 botonBuscador.addEventListener("click", filtro);
 inputBuscador.addEventListener("keyup", filtro); */
 
-//template para las cards de cada evento (no logre poner las imagenes)
+//template para las cards de cada evento (no logre poner las imagenes intente con url y no aparecian)
 let template = "";
 jsondatos.forEach((item) => {
     template += `
@@ -84,11 +84,11 @@ listaPartidos.innerHTML = template;
 const areaCard = document.getElementById("evento");
 const botonCard = document.getElementById("button");
 
-areaCard.addEventListener("click", (e) => {
+areaCard.addEventListener("click", (e) => { //solo me marca el Log en la primer card y en el resto no ¿?
     console.log("elegido");
 });
 
-botonCard.addEventListener("click", (e) => {
+botonCard.addEventListener("click", (e) => { //solo me marca el Log en la primer card y en el resto no ¿?
     console.log("elegido");
 });
 //card elegida => data => localstorage => partido.html
