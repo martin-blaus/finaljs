@@ -1,3 +1,4 @@
+//vi un video que lo hacia asi a la base de datos y tenia el json aparte, no le encuentro el sentido pero al menos funciona 
 const partidos = `[
     {
         "id":1,
@@ -43,62 +44,56 @@ const partidos = `[
 const jsondatos = JSON.parse(partidos);
 console.log(jsondatos);
 
-const barraBusqueda = document.getElementById("barraBusqueda");
-const input = document.querySelectorAll("#barraBusqueda input");
+const inputBuscador = document.getElementById("buscador");
+const botonBuscador = document.querySelector("#buscar")
 const listaPartidos = document.getElementById("listaPartidos");
 
+/* const filtro = () => {
+    console.log(inputBuscador.value);
+    const texto = inputBuscador.value.toLowerCase(); //no toma el tolowercase ¿?
+    for (let partido of partidos) {
+        let nombre = partido.titulo.toLowerCase();
+        if (nombre.indexOf(texto) !== -1){
+            //quitar elementos que no coinciden con la busqueda ¿?
+        }
+    }
+//
+}
+botonBuscador.addEventListener("click", filtro);
+inputBuscador.addEventListener("keyup", filtro); */
 
+//template para las cards de cada evento (no logre poner las imagenes)
 let template = "";
 jsondatos.forEach((item) => {
     template += `
     <li>
-    <div class= "row row-cols-1 row-cols-md-2 g-4">
-        <img src= "${item.image}"  class="card-img-top"></img>
+    <div class= "row row-cols-1 row-cols-md-2 g-4" id="evento">
+        <img src= ${item.img}"  class="card-img-top"></img> 
         <div class="card-body">
             <h5 class="card-title">${item.titulo}</h5>
             <p class="card-text">${item.fecha} - ${item.torneo} - ${item.esport}</p>
             <p class="card-text text-success fw-bolder">$${item.precio}</p>
-            <button name="elegir" id="dos" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
+            <button name="button" id="button" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
         </div>
     </div>
     </li>
     `;
 });
-
 listaPartidos.innerHTML = template;
 
-/*const partidoUno = document.getElementById("partidoUno");
-const partidoDos = document.getElementById("partidoDos");
-const partidoTres = document.getElementById("partidoTres");
-const partidoCuatro= document.getElementById("partidoCuatro");
+const areaCard = document.getElementById("evento");
+const botonCard = document.getElementById("button");
 
-
-inputs.forEach((input) => {
-    input.addEventListener("keyup", (b) => {
-        //buscarPartido
-    });
-    }); 
-const buscarPartido = (e) => {
-    //funcion para que se muestren solo los partidos que coinciden con la busqueda 
-}
-
-//opciones de cada partido
-partidoUno.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("1");
+areaCard.addEventListener("click", (e) => {
+    console.log("elegido");
 });
 
-partidoDos.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("2");
+botonCard.addEventListener("click", (e) => {
+    console.log("elegido");
 });
+//card elegida => data => localstorage => partido.html
 
-partidoTres.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("3");
-});
+//como no logre hacer que me devuelva la card elegida no puedo seguir con la parte del partido.html
 
-partidoCuatro.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("4");
-}); */
+
+

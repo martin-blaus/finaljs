@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="recursos/btovalwhite.png" type="image/x-icon">
+    <link rel="shortcut icon" href="recursos/btredondo-min.png" type="image/x-icon">
     <meta name="keywords" content="Blacktail, Esports, Mendoza, Gaming, Argentina">
     <meta name="description" content="Sé parte de Blacktail Esports. Blacktail Esports es un equipo semiprofesional de esports con base en Mendoza, Argentina. Actualmente trabajando con la disciplina de League of Legends en busca de ampliar horizontes para el gaming del interior del pais">
     <title>Blacktail Esports</title>
@@ -65,10 +65,15 @@
                 <h1>Proximos partidos</h1>
             </div>
                 <div class="mb-4 mx-5" id="barraBusqueda">
-                    <input type="text" class="form-control" id="buscador" placeholder="¿Que evento buscas?">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="buscador" placeholder="¿Que evento buscas?">
+                        <button name="elegir" id="buscar" type="button" class="btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg></button>
+                    </div>
                 </div>
             <div id="partidos">
-                <ul id="listaPartidos">
+                <ul id="listaPartidos" class="row row-cols-1 row-cols-md-2 g-4">
                     <!--partido1--> 
                 </ul>
             </div>
