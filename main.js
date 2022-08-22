@@ -41,11 +41,33 @@ const partidos = `[
     }
 ]`
 const jsondatos = JSON.parse(partidos);
-console.log(typeof jsondatos);
+console.log(jsondatos);
 
 const barraBusqueda = document.getElementById("barraBusqueda");
-const inputs = document.querySelectorAll("#barraBusqueda input");
-const partidoUno = document.getElementById("partidoUno");
+const input = document.querySelectorAll("#barraBusqueda input");
+const listaPartidos = document.getElementById("listaPartidos");
+
+
+let template = "";
+jsondatos.forEach((item) => {
+    template += `
+    <li>
+    <div class= "row row-cols-1 row-cols-md-2 g-4">
+        <img src= "${item.image}"  class="card-img-top"></img>
+        <div class="card-body">
+            <h5 class="card-title">${item.titulo}</h5>
+            <p class="card-text">${item.fecha} - ${item.torneo} - ${item.esport}</p>
+            <p class="card-text text-success fw-bolder">$${item.precio}</p>
+            <button name="elegir" id="dos" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
+        </div>
+    </div>
+    </li>
+    `;
+});
+
+listaPartidos.innerHTML = template;
+
+/*const partidoUno = document.getElementById("partidoUno");
 const partidoDos = document.getElementById("partidoDos");
 const partidoTres = document.getElementById("partidoTres");
 const partidoCuatro= document.getElementById("partidoCuatro");
@@ -79,4 +101,4 @@ partidoTres.addEventListener("click", (e) => {
 partidoCuatro.addEventListener("click", (e) => {
     e.preventDefault();
     console.log("4");
-});
+}); */
