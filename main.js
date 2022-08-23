@@ -58,7 +58,7 @@ const filtrar = () => {
 botonBuscador.addEventListener("click", filtrar);
 inputBuscador.addEventListener("keyup", filtrar);
 
-//template para las cards de cada evento (no logre poner las imagenes intente con url y no aparecian)
+//template para las cards de cada evento 
 let template = "";
 partidos.forEach((item) => template += buildTemplate(item));
 listaPartidos.innerHTML = template;
