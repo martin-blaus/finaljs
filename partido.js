@@ -51,7 +51,7 @@ botonCantidad.addEventListener("click", (e) => {
 const botonConfirmar = document.getElementById("botonSi");
 const entradaFormArea = document.getElementById("entradasForm");
 const template = "";
-const photo = document.getElementById("img");
+
 
 function entradaPdf(e) {
     const { jsPDF } = window.jspdf;
