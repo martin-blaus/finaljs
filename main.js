@@ -1,5 +1,4 @@
-//vi un video que lo hacia asi a la base de datos y tenia el json aparte, no le encuentro el sentido tenerlo en los dos lados pero al menos funciona 
-const partidos = `[
+const partidosStr = `[
     {
         "id":1,
         "torneo":"The Last Legends",
@@ -41,34 +40,34 @@ const partidos = `[
         "cantidad": 10
     }
 ]`
-const jsondatos = JSON.parse(partidos);
-console.log(jsondatos);
-
+localStorage.setItem("partidos", partidosStr);
+const partidos = JSON.parse(partidosStr);
+console.log(partidos);
 const inputBuscador = document.getElementById("buscador");
 const botonBuscador = document.querySelector("#buscar")
 const listaPartidos = document.getElementById("listaPartidos");
 
-/* const filtro = () => {
+const filtrar = () => {
     console.log(inputBuscador.value);
-    const texto = inputBuscador.value.toLowerCase(); //no toma el tolowercase ¿?
-    for (let partido of partidos) {
-        let nombre = partido.titulo.toLowerCase();
-        if (nombre.indexOf(texto) !== -1){
-            //quitar elementos que no coinciden con la busqueda ¿?
-        }
-    }
-//
+    const filtered = partidos.filter(x => x.titulo.toLowerCase().includes(inputBuscador.value.toLowerCase()));
+    let template = "";
+    console.log(filtered);
+    filtered.forEach((item) => template += buildTemplate(item));
+    listaPartidos.innerHTML = template;
 }
-botonBuscador.addEventListener("click", filtro);
-inputBuscador.addEventListener("keyup", filtro); */
+botonBuscador.addEventListener("click", filtrar);
+inputBuscador.addEventListener("keyup", filtrar);
 
 //template para las cards de cada evento (no logre poner las imagenes intente con url y no aparecian)
 let template = "";
-jsondatos.forEach((item) => {
-    template += `
+partidos.forEach((item) => template += buildTemplate(item));
+listaPartidos.innerHTML = template;
+
+function buildTemplate(item) {
+    return `
     <li>
-    <div class= "row row-cols-1 row-cols-md-2 g-4" id="evento">
-        <img src= ${item.img}"  class="card-img-top"></img> 
+    <div class= "row row-cols-1 row-cols-md-2 g-4 bg-dark" id="evento" onClick="navigateToEvent(${item.id})">
+    <img src="recursos/portadas/${item.id}.png"  class="card-img-top"></img> 
         <div class="card-body">
             <h5 class="card-title">${item.titulo}</h5>
             <p class="card-text">${item.fecha} - ${item.torneo} - ${item.esport}</p>
@@ -77,23 +76,14 @@ jsondatos.forEach((item) => {
         </div>
     </div>
     </li>
-    `;
-});
-listaPartidos.innerHTML = template;
-
-const areaCard = document.getElementById("evento");
-const botonCard = document.getElementById("button");
-
-areaCard.addEventListener("click", (e) => { //solo me marca el Log en la primer card y en el resto no ¿?
-    console.log("elegido");
-});
-
-botonCard.addEventListener("click", (e) => { //solo me marca el Log en la primer card y en el resto no ¿?
-    console.log("elegido");
-});
+    `
+}
+function navigateToEvent(id) {
+    console.log(id);
+    window.location = "partido.html?event=" + id
+}
 //card elegida => data => localstorage => partido.html
 
-//como no logre hacer que me devuelva la card elegida no puedo seguir con la parte del partido.html
 
 
 
