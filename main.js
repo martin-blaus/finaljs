@@ -66,14 +66,16 @@ listaPartidos.innerHTML = template;
 function buildTemplate(item) {
     return `
     <li>
+    <div class="mb-4 me-3">
     <div class= "row row-cols-1 row-cols-md-2 g-4 bg-dark" id="evento" onClick="navigateToEvent(${item.id})">
     <img src="recursos/portadas/${item.id}.png"  class="card-img-top"></img> 
-        <div class="card-body">
+        <div class="card-body m-3">
             <h5 class="card-title">${item.titulo}</h5>
             <p class="card-text">${item.fecha} - ${item.torneo} - ${item.esport}</p>
             <p class="card-text text-success fw-bolder">$${item.precio}</p>
             <button name="button" id="button" type="button" value="Input" class="btn btn-secondary">TICKETS</button>
         </div>
+    </div>
     </div>
     </li>
     `
