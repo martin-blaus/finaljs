@@ -1,6 +1,6 @@
 //PARTIDO.HTML
 const evento = new URLSearchParams(window.location.search).get('event')
-console.log("Detalles de "+ evento);
+console.log("Detalles de " + evento);
 partidos = JSON.parse(localStorage.getItem("partidos"));
 console.log(partidos)
 const partido = partidos.find(p => p.id === parseInt(evento));
@@ -37,35 +37,30 @@ botonCantidad.addEventListener("click", (e) => {
     const precioEvento = partido.precio;
     console.log(cantEntradas);
     localStorage.setItem("cantidad", cantEntradas);
-    function multiplicar (a, b) {
-        return a * b};
-    const precio = multiplicar (precioEvento, cantEntradas);
+    function multiplicar(a, b) {
+        return a * b
+    };
+    const precio = multiplicar(precioEvento, cantEntradas);
     console.log(precio);
     divPrecio.innerHTML = `
     <div class="mx-auto">
         <p class="card-text fw-bolder text-light m-3 text-center">Total a pagar= $${precio}</p> 
     </div>
     `
+    domEntradas()
+    botonConfirmar.style.visibility = "visible";
+
 });
 
 const botonSiguiente = document.getElementById("botonSi");
 const entradaFormArea = document.getElementById("entradasForm");
-const template = "";
 const botonConfirmar = document.getElementById("botonFin");
 
-botonConfirmar.style.display = "none"
 
-botonSiguiente.addEventListener("click", (e) => {
-    e.preventDefault();
-    domEntradas(); 
-    botonSiguiente.style.display = "none";
-    botonConfirmar.style.display = "block";
-});
 
-const domEntradas = (e) => {
+const domEntradas = () => {
     const entradas = inputCantidad.value;
-    function buildTemplateForm (){
-        return  `
+    entradaFormArea.innerHTML = `
         <div class="card mb-3 bg-dark text-white" style="max-width: 540px;">
         <div class="row g-0">
                 <div class="col-md-4">
@@ -76,7 +71,7 @@ const domEntradas = (e) => {
             <h5 class="card-title">${partido.titulo}</h5>
                 <p class="card-text">${partido.torneo} - ${partido.fecha}</p>
                 <p class="card-text">${entradas} Entradas</p>
-                <p class="card-text">Titular:</p>
+                <p class="card-text">Titular</p>
                 <form id="formPersona">
                 <div class="mb-3">
                     <label for="nombrePersona" class="form-label">Nombre</label>
@@ -87,16 +82,11 @@ const domEntradas = (e) => {
                     <input type="text" class="form-control" name="dniPersona" id="dniPersona" placeholder="39.378.623">
                 </div>
                 </form>
-                <div id="alerta"></div>
+                <div class="text-danger" id="alerta"></div>
             </div>
         </div>
     </div>
-    </div>
-            `
-        };
-        let template = "";
-        template += buildTemplateForm();
-        entradaFormArea.innerHTML = template;
+    </div>`
 };
 
 botonConfirmar.addEventListener("click", (e) => {
@@ -104,77 +94,84 @@ botonConfirmar.addEventListener("click", (e) => {
     confirmarCompra();
 });
 
-const confirmarCompra = (e) => {
+const confirmarCompra = () => {
+    go()
+    const esValido = validarForm();
+    if(!esValido)
+        return;
     let cantEntradas = inputCantidad.value;
     let nombreCompra = document.getElementById("nombrePersona").value;
     let dniCompra = document.getElementById("dniPersona").value;
-    localStorage.setItem("cantidad", cantEntradas);
-    localStorage.setItem("nombre", nombreCompra);
-    localStorage.setItem("DNI", dniCompra);
+    let compras = localStorage.getItem("compras");
+    if (!compras) {
+        //inicializar la primera vez
+        compras = [];
+        localStorage.setItem('compras', compras);
+    } else {
+        compras = JSON.parse(compras);
+    }
+    compras.push({ cantidad: cantEntradas, nombre: nombreCompra, dni: dniCompra })
+    localStorage.setItem('compras', JSON.stringify(compras));
     Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Entrada Reservada',
         timer: 1500
     });
-    function entradaPdf(e) {
+    function entradaPdf() {
         const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            //doc.addImage(); //Investigar como se hace 
-            doc.text(`  ENTRADA
+        const doc = new jsPDF();
+        //doc.addImage(); //Investigar como se hace 
+        doc.text(`  ENTRADA
                         Titular: ${nombreCompra} - DNI: ${dniCompra}
                         Partido: ${partido.titulo}
                         Fecha: ${partido.fecha}
                         Torneo: ${partido.torneo}
                         Cantidad de entradas: ${cantEntradas} (Asiento no numerado)
                         `, 10, 10)
-            doc.save("Entrada.pdf");
+        doc.save("Entrada.pdf");
     };
     entradaPdf();
 };
 
+
+
 //validaciones
 const expresiones = {
-	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	cantEntradas: /^\d{1}$/,//un caracter
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    cantEntradas: /^\d{1}$/,//un caracter
     dni: /^\d{7,9}$/ //7 a 9 caracteres 
 };
 
-const alerta = document.getElementById("alerta");
-const stay = () => {
+// const alerta = document.getElementById("alerta"); -> No podes declarar aca poque solo aparece en el documento una vez que clickeas las entradas
+const failConfirmar = (mensaje) => {
+    console.log(mensaje)
+    alerta = document.getElementById('alerta');
     alerta.classList.remove("text-success");
     alerta.classList.add("text-danger");
-    alerta.innerHTML = "Los campos son OBLIGATORIOS. Revisa que se hayan colocado correctamente.";
+    alerta.innerHTML = "Los campos son OBLIGATORIOS. Revisa que se hayan colocado correctamente: \n" + mensaje;
 };
 const go = () => {
-    alerta.classList.remove("text-danger");
-    alerta.classList.add("text-success");
-    alerta.innerHTML = "¡Se ve bien!";
+    alerta.innerHTML = '';
 };
 
 const formulario = document.getElementById("formPersona");
 const inputs = document.querySelectorAll("#formPersona input");
 const nombreInput = document.getElementById("nombrePersona");
-const dniInput= document.getElementById("dniPersona");
+const dniInput = document.getElementById("dniPersona");
 
-const validarForm = (e) => {
-    switch (e.target.name) {
-        case"nombrePersona":
-            if (expresiones.nombre.test(e.target.value)) {
-                go();
-            } else{
-                stay();
-            }
-        break;
-        case"dniPersona":
-        if (expresiones.dni.test(e.target.value)) {
-            go();
-        } else{
-            stay();
-        }
-        break;
-    }};
-    inputs.forEach((input) => {
-        input.addEventListener("keyup", /* validarForm */ console.log("coso"));
-        }); 
-    
+const validarForm = () => {
+    const nombre = document.getElementById("nombrePersona");
+    if(!nombre.value || !expresiones.nombre.test(nombre.value)){
+        failConfirmar("Error nombre")
+        return false;
+    }
+    const dni = document.getElementById("dniPersona");
+
+    if(!dni.value || !expresiones.dni.test(dni.value)){
+        failConfirmar("Error DNI")
+        return false;
+    }
+    return true;
+};
+
